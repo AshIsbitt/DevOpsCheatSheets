@@ -35,6 +35,8 @@ Download images from hub.docker.com (We're using whalesay as a demo)
     - If you do `docker run` without the image downloaded, it'll also run `docker pull` first
 `docker inspect <container>` will return all the details about a container in JSON format - this gives much more infromation than `docker ps` does
 `docker logs <container>` will give you all the logs from when a container ran, even if it's run in detatched mode. 
+`docker run -e ENV_VAR=value <container>` will let you set environment variables for a package
+    - `docker inspec <container>` will let you see the set environment vars under the "config" section
 
 Containers aren't meant to run an entire OS, even though there are OS images to download. runnign `docker run ubuntu` will generally close after a second
 `docker run ubuntu sleep 100` - you can run a command in the container through the docker run
