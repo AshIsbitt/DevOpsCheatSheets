@@ -63,4 +63,27 @@ THis allows you to save data even when a container isn't running. Otherwise, whe
     - copying files to the right place
     - Make sure the OS is there too
 
+Step 1> Create a `Dockerfile` with all the pieces from the list of instructions
+Step 2> `docker build Dockerfile -t <imageName>` - At this point, you're creating the name of the image
+Step 3> `docker push <imageName>` - This pushes the new image to DockerHub
+
+Dockerfiles take instructions and arguments
+eg:
+
+```
+FROM Ubuntu
+
+RUN apt-get update
+RUN apt-get install python
+
+RUN pip install flask
+RUN pip install flask-mysql
+
+COPY . /opt/source-code
+
+ENTRTYPOINT FLASK_APP=/opt/source-code/app.py flask run
+```
+
+All Dockerfiles has to start with a FROM command, and needs to be based off another image (base OS images are common here)
+
 
