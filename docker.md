@@ -57,3 +57,10 @@ One benefit here is to run different applications on different ports, or differe
 THis allows you to save data even when a container isn't running. Otherwise, when a container stops, it's data will be lost.
 `docker run -v host/file/dir:/var/lib/mysql <mysql>`
 
+### Creating your own image
+- figure out the process to set the software up manually
+    - each command and dependancy
+    - copying files to the right place
+    - Make sure the OS is there too
+
+
