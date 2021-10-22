@@ -86,4 +86,10 @@ ENTRTYPOINT FLASK_APP=/opt/source-code/app.py flask run
 
 All Dockerfiles has to start with a FROM command, and needs to be based off another image (base OS images are common here)
 
+`docker build Dockerfile -t <name>` is the command to build that dockerfile into an image.
+Each layer is cached, so if it fails halfway through a build, you don't need to re-package the parts you've already done
 
+Adding `CMD to the bottom of a dockerfile tells it commands to run.
+    For example `CMD sleep 5` at the end of a dockerfile that only runs ubuntu would run the `sleep 5` command in the ubuntu terminal.l    You can also specify commands in a JSON format (think like a python list) `CMD ["sleep", "5"]`
+You would use `ENTRYPOINT` to specify a command and then append a parameter in the `docker run` command.
+    - You can set a default on the entrypoint by having a command line below it.
