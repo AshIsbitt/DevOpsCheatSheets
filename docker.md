@@ -93,3 +93,21 @@ Adding `CMD to the bottom of a dockerfile tells it commands to run.
     For example `CMD sleep 5` at the end of a dockerfile that only runs ubuntu would run the `sleep 5` command in the ubuntu terminal.l    You can also specify commands in a JSON format (think like a python list) `CMD ["sleep", "5"]`
 You would use `ENTRYPOINT` to specify a command and then append a parameter in the `docker run` command.
     - You can set a default on the entrypoint by having a command line below it.
+
+### Networking in Docker
+Three networks are created when Docker is installed: Bridge, Null, Host.
+Standard `docker run` is on the bridge network, but adding the `--network=` flag you can specify which of the other two you use
+
+- Using the Bridge means that it's all stored in it's own little box, meaning that the ports in the docker container are different to the ports outside - it's own little sub network
+- Using the host network means that it's accessible without being containerised, meaning the ports are accessible on your local network
+    - You can't then run multiple containers on the same port.
+- Using the none network means that the container is isolated and can't use any port access at all.
+
+`docker network create --driver <network_type> --subnet <IP> custom-isolated-network` is used to create a unique sub-network
+`docker network ls` will show all networks
+
+Under `docker inspect`, you can see the bridge and network data
+
+Docker has it's own built-in DNS server
+    - This is at `127.0.0.11`
+
