@@ -111,3 +111,10 @@ Under `docker inspect`, you can see the bridge and network data
 Docker has it's own built-in DNS server
     - This is at `127.0.0.11`
 
+### Docker Storage and file systems
+THe file system is created at `/var/lib/docker` on your local machine, including downloaded containers, images, and volumes
+
+If multiple dockerfiles use the same commands, they will reuse assets. FOr example, if you have `FROM Ubuntu` in multiple dockerfiles, once Ubuntu downloads once, other dockerfiles will reuse that same installation to save disk space
+
+
+
