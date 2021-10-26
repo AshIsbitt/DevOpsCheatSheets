@@ -121,4 +121,94 @@ If multiple dockerfiles use the same commands, they will reuse assets. FOr examp
     - Mount the folder to the container by adding `<folder_name>:container/directory/location` to your docker run command
     - This is better/more verbose to be done like this: `docker run --mount type=bind, source=host/directory, target=/container/directory/location <container>`
 
+### Docker Compose
+A Docker Compose file is used to combine a number of different processes together
+This is written into a single file using the YAML markup language, then run with a `docker-compose up`
+A benefit over doing a series of `docker run` commands means that they're going to all be linked together as opposed to just being standalone containers
+    - Although this can also be done by adding `--link name:<container_name>` to your `docker run` commands (This is a deprecated function though)
+
+#### Writing an example Docker Compose
+1 - Figure out how to get the images working with `docker run`:
+
+```
+docker run -d --name=redis redis
+docker run -d --name=db postgres:9.4
+docker run -d --name=vote -p 5000:80 --link redis:redis voting-app
+docker run -d --name=result -p 5001:80 --link db:db result-app
+docker run -d --name=worker --link db:db --link redis:redis worker
+```
+
+2- This can now become a single dockercompose.yml file
+    - Create dictionaries with each of the container names in (--name=)
+    - Set the image as a K/V pair underneath (the final section of each docker run)
+    - Add port adjustment as a list under the image (5001:80)
+    - Add links as a list (--link)
+
+```
+redis:
+    image: redis
+db:
+    image: postgres:9.4
+vote:
+    image:voting-app
+    ports:
+        - 5000:80
+    links:
+        - redis
+result:
+    image:result-app
+    links:
+        - db
+worker:
+    image:worker
+    ports:
+        - 5001:80
+    links:
+        - db
+        - redis
+```
+
+Then do `docker-compose up` to launch the whole stack.
+
+If you have a local dockerfile instead of a hosted docker image already, you can replace the image line with a `build` command with a path to a dockerfile instead.
+The above dockercompose file is written in version 1. To use version to, you have to specify `version:2` in the first line, and then add `services:` at the top and indent each line once more.
+    - The benefit of this is that version 2 will automatically create a bridged network between the different images and links them all, so you can get rid of the `links` lines
+
+Version 3 also supports `docker swarm` and has some other features added and removed.
+
+#### Adding networks to dockercompose V2
+```
+version: 2
+services
+    redis:
+        image: redis
+        networks:
+            - back-end
+    db:
+        image: postgres:9.4
+        networks:
+            - back-end
+    vote:
+        image:voting-app
+        ports:
+            - 5000:80
+        networks:
+            - front-end
+            - back-end
+    result:
+        image:result-app
+        networks:
+            - front-end
+            - back-end
+    worker:
+        image:worker
+        ports:
+            - 5001:80
+        networks:
+            - back-end
+networks:
+    front-end:
+    back-end:
+```
+
 
