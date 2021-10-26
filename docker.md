@@ -229,4 +229,14 @@ You can also host your own registry with a docker image provided by docker calle
 Then push your image to the private registry with `docker image tag <image_name> localhost:5000/<image_name>`
     - And follow this with a `docker push localhost:5000/<image_name>`
 
+### Docker Engine
+This is the name of what you install when you download Docker to a host. This contains:
+    - Docker CLI - This doesn't have to be on the same host, and can interact with a remote docker engine using the `-H` flag
+    - REST API
+    - Docker Daemon - Background process that manages processes such as containers, images, networks
+
+Docker uses namespaces to isolate workspaces, such as PID, unix timesharing, networks, and mounts
+Docker uses 'cgroups' (Control groups) to limit the amount of hardware resources for each container
+    - add `--cpus=` to your `docker run` to control this manually. This takes a float value ie .5
+    - add `--memory=` to specify the amount of RAM your container has in mb (append 'm' to the end of the number)
 
