@@ -211,4 +211,22 @@ networks:
     back-end:
 ```
 
+### Docker registry
+`image: nginx`
+What you're really saying here is `docker.io/nginx/nginx`
+    - `docker.io` is the DNS repository of the docker hub registry 
+    - The first `nginx` is like the user/account name
+    - The second `nginx` is the image/repository name
+
+Other registries include google's `gcr.io, which holds a number of k8s related images
+You can also host your own registries, and AWS/Azure tend to provide registry hosts when you sign up with them
+
+`docker login private-registry.io` - Allows you to login to your private registry. 
+    - You can then write out a full `docker run` command using the above specification to create a container.
+
+You can also host your own registry with a docker image provided by docker called `registry` instead of on a cloud platfrom.
+`docker run registry -p 5000:5000 --name registry registry:2`
+Then push your image to the private registry with `docker image tag <image_name> localhost:5000/<image_name>`
+    - And follow this with a `docker push localhost:5000/<image_name>`
+
 
