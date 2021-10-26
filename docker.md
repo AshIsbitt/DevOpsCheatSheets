@@ -11,6 +11,7 @@ Using both containers and VMs together can be a benefit. You can use them togeth
 Most common applications have docker containerized versions up on the Docker store already.  
 
 `docker run <tool>` will run a dockerised version of that tool, such as Ansible, mongodb, redis, nodejs. Running `docker run` with the same tool a second time will add a second instance of the tool, and you just need to load balance between the two to make full use of it.
+
     - `tool:version` will allow you to specify the version of the tool you want to use. default is `latest`
         -  Other tags are listed on the Docker Hub page for each image.
     - `-i` will allow you to accept user input if your script requires it (interactive mode)
@@ -116,5 +117,8 @@ THe file system is created at `/var/lib/docker` on your local machine, including
 
 If multiple dockerfiles use the same commands, they will reuse assets. FOr example, if you have `FROM Ubuntu` in multiple dockerfiles, once Ubuntu downloads once, other dockerfiles will reuse that same installation to save disk space
 
+`docker volume create <folder_name>` - This is used to create a 'volume' for persistant storage
+    - Mount the folder to the container by adding `<folder_name>:container/directory/location` to your docker run command
+    - This is better/more verbose to be done like this: `docker run --mount type=bind, source=host/directory, target=/container/directory/location <container>`
 
 
