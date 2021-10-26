@@ -240,3 +240,18 @@ Docker uses 'cgroups' (Control groups) to limit the amount of hardware resources
     - add `--cpus=` to your `docker run` to control this manually. This takes a float value ie .5
     - add `--memory=` to specify the amount of RAM your container has in mb (append 'm' to the end of the number)
 
+### Container Orchestration
+This is one host that holds multiple containers for a production environment
+    - This is mostly used for data redundancy and to prevent issues with containers going down or similar issues.
+
+`docker service create --replicas=100 nodejs` - This creates 100 identical nodeJS containers
+
+Docker hosts allow you to scale up or down based on the needs of the users.
+Additional hosts can also be added if they are required
+Orchestration solutions also support advanced networking between hosts, as well as load balancing
+
+Various Orchestration tools include:
+    - Docker Swarm
+    - Kubernetes - This is the most popular and well supported orchestration tool
+    - Mesos
+
