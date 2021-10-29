@@ -21,6 +21,9 @@ Uncomment line 40 `config.vm.network "public_network"` to allow the VM to have a
 Line 46 of the vagrantfile `config.vm.synced_folder "../data", "/vagrant_data"` lets you sync a file over from your host to the VM when its created.
 
 `vagrant up` will start the machine as provisioned
+`vagrant ssh` will then let you SSH into the VM without worrying about setting
+up SSH keys. You can exit with `exit`
+`vagrant destroy` will delete the VM with all of it's files.
 
 ### Vagrant Provisioning
 The easiest way to provision a file is to add the following line:
@@ -29,3 +32,6 @@ and then write all the shell commands needed into `script.sh`.
 
 Note that the `path:` argument can take a file path, as well as a URL if you
 are holding your sh script on gist or another location. 
+
+`vagrant provision` will let you re-run the provision script without destroying
+and recreating the whole machine
