@@ -22,3 +22,10 @@ Line 46 of the vagrantfile `config.vm.synced_folder "../data", "/vagrant_data"` 
 
 `vagrant up` will start the machine as provisioned
 
+### Vagrant Provisioning
+The easiest way to provision a file is to add the following line:
+`config.vm.provision "shell", path: "script.sh"`
+and then write all the shell commands needed into `script.sh`.
+
+Note that the `path:` argument can take a file path, as well as a URL if you
+are holding your sh script on gist or another location. 
