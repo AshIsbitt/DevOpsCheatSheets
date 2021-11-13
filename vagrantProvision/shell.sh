@@ -3,23 +3,18 @@
 sudo apt-get update && sudo apt-get upgrade -y
 
 echo "Set keyboard..."
+sudo setxkbmap gb
 rm /etc/default/keyboard
 touch /etc/default/keyboard
 echo 'XKBMODEL="macbook79"
 XKBLAYOUT="gb"
 XKBVARIANT="mac_intl"
-XKBOPTIONS="lv3:alt_switch/n"
+XKBOPTIONS="lv3:alt_switch"
+
 BACKSPACE="guess"' > /etc/default/keyboard
-
-# https://github.com/angel-devicente/Vagrantfiles/blob/main/ubuntu2110/Vagrantfile
-#echo Installing Mate Desktop
-#sudo apt install -y ubuntu-mate-desktop
-#sudo rm /usr/share/xsessions/ubuntu.desktop
-
 
 echo "Installing virtualbox guest drivers..."
 sudo apt install virtualbox-guest-dkms
-xrandr --output VGA-1 --mode 1280x800
 xrandr --output VGA-1 --mode 2560x1600 
 
 # Change root password
@@ -30,9 +25,9 @@ echo "Installing py310..."
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install -y  python3.10
 
-echo "Change default python3..."
-sudo unlink /usr/bin/python3
-sudo ln -s /usr/bin/python3.10 /usr/bin/python3
+#echo "Change default python3..."
+#sudo unlink /usr/bin/python3
+#sudo ln -s /usr/bin/python3.10 /usr/bin/python3
 
 echo "Installing Neovim..."
 sudo apt-get install -y neovim
@@ -48,7 +43,7 @@ chsh -s $(which zsh)
 
 # GH-CLI
 echo "installing gh-cli..."
-ls -la /usr/lib/python3/dist-packages/apt_pkg.cpython-38m-x86_64-linux-gnu.so /usr/lib/python3/dist-packages/apt_pkg.so
+ls -la /usr/lib/python3/dist-packages/apt_pkg.cpython-38-x86_64-linux-gnu.so /usr/lib/python3/dist-packages/apt_pkg.so
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 sudo apt update
@@ -69,12 +64,12 @@ git config --global user.email "ashisbitt@icloud.com"
 ssh-add ~/.ssh/Workbox-vm-key
 
 # git clone dotfiles
-gh repo clone AshIsbitt/dotfiles ~/tmp/dotfiles
+git clone git@github.com:ashisbitt/dotfiles.git /home/vagrant/tmp
 
 # Set up dotfiles symlinks
 
 
-# RestartE
+# Restart
 #echo "REBOOTING..."
 #sudo reboot
 
