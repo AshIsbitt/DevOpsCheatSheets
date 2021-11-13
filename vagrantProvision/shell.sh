@@ -70,8 +70,8 @@ git clone git@github.com:ashisbitt/dotfiles.git /home/vagrant/tmp
 
 
 # Restart
-#echo "REBOOTING..."
-#sudo reboot
+echo "REBOOTING..."
+sudo reboot
 
 echo "PROVISIONING COMPLETE"
 echo "UNABLE TO DO FROM TERMINAL: INSTALL FIREFOX ADD-ONS"
