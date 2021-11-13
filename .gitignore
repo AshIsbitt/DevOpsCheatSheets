@@ -1,1 +1,2 @@
-vagrantTests/.vagrant/*
+vagrantProvision/.vagrant/*
+.DS_Store
