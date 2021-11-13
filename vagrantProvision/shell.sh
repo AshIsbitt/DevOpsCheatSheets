@@ -1,24 +1,21 @@
 #!/usr/bin/env bash
 
+sudo apt-get update && sudo apt-get upgrade -y
 
 echo "Set keyboard..."
 rm /etc/default/keyboard
 touch /etc/default/keyboard
-echo 'XKBMODEL="macbook79"' > /etc/default/keyboard
-echo 'XKBLAYOUT="gb"' > /etc/default/keyboard
-echo 'XKBVARIANT="mac_intl"' > /etc/default/keyboard
-echo 'XKBOPTIONS="lv3:alt_switchi/n/n"' > /etc/default/keyboard
-echo 'BACKSPACE="guess"' > /etc/default/keyboard
+echo 'XKBMODEL="macbook79"
+XKBLAYOUT="gb"
+XKBVARIANT="mac_intl"
+XKBOPTIONS="lv3:alt_switch/n"
+BACKSPACE="guess"' > /etc/default/keyboard
 
 # https://github.com/angel-devicente/Vagrantfiles/blob/main/ubuntu2110/Vagrantfile
-echo Installing Mate Desktop
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt install -y ubuntu-mate-desktop
-sudo rm /usr/share/xsessions/ubuntu.desktop
+#echo Installing Mate Desktop
+#sudo apt install -y ubuntu-mate-desktop
+#sudo rm /usr/share/xsessions/ubuntu.desktop
 
-# Restart to start DE
-echo "REBOOTING..."
-sudo reboot
 
 echo "Installing virtualbox guest drivers..."
 sudo apt install virtualbox-guest-dkms
@@ -46,6 +43,9 @@ sudo apt install -y zsh
 echo "installing oh-my-zsh..."
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# Set ZSH as default shell
+chsh -s $(which zsh)
+
 # GH-CLI
 echo "installing gh-cli..."
 ls -la /usr/lib/python3/dist-packages/apt_pkg.cpython-38m-x86_64-linux-gnu.so /usr/lib/python3/dist-packages/apt_pkg.so
@@ -56,19 +56,27 @@ sudo apt install gh
 
 echo "installing neofetch"
 sudo apt-get install -y neofetch
-echo "neofetch" >> ~/.bashrc
+echo "neofetch" >> ~/.zshrc
 
 echo "installing btm"
 curl -LO https://github.com/ClementTsang/bottom/releases/download/0.6.4/bottom_0.6.4_amd64.deb
 sudo dpkg -i bottom_0.6.4_amd64.deb
 
-mkdir ~/tmp
+sudo mkdir /home/vagrant/tmp
+
+git config --global user.name "Ash Isbitt"
+git config --global user.email "ashisbitt@icloud.com"
+ssh-add ~/.ssh/Workbox-vm-key
 
 # git clone dotfiles
 gh repo clone AshIsbitt/dotfiles ~/tmp/dotfiles
 
 # Set up dotfiles symlinks
 
+
+# RestartE
+#echo "REBOOTING..."
+#sudo reboot
 
 echo "PROVISIONING COMPLETE"
 echo "UNABLE TO DO FROM TERMINAL: INSTALL FIREFOX ADD-ONS"
