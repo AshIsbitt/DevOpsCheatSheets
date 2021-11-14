@@ -61,17 +61,6 @@ sudo mkdir /home/vagrant/tmp
 
 git config --global user.name "Ash Isbitt"
 git config --global user.email "ashisbitt@icloud.com"
-ssh-add ~/.ssh/Workbox-vm-key
-
-# git clone dotfiles
-git clone git@github.com:ashisbitt/dotfiles.git /home/vagrant/tmp
-
-# Set up dotfiles symlinks
-
-
-# Restart
-echo "REBOOTING..."
-sudo reboot
 
 echo "PROVISIONING COMPLETE"
 echo "UNABLE TO DO FROM TERMINAL: INSTALL FIREFOX ADD-ONS"
