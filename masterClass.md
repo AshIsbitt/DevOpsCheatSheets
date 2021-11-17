@@ -5,11 +5,11 @@ This is a compilation of all my notes taking the [john savile master class](http
 ***
 ## Contents
 
-1. [Foundation](##Foundation)
-2. [Git](##Git)
+1. [Foundation](#Foundation)
+2. [Git](#Git)
 
 ***
-## Foundation
+# Foundation
 What is DevOps, key concepts, getting ready.
 
 DevOps is *not* a specific product - "Devops is the union of people, process and product to enalbe continuous delivery of value to our end users"
@@ -130,4 +130,4 @@ GitOps - you can point K8s at a git repo, and every time you push a change, k8s 
 
 ***
 
-## Git
+# Git
