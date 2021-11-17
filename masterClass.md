@@ -6,6 +6,7 @@ This is a compilation of all my notes taking the [john savile master class](http
 ## Contents
 
 1. [Foundation](##Foundation)
+2. [Git](##Git)
 
 ***
 ## Foundation
@@ -127,3 +128,6 @@ From here, you can push data to a cloud, to k8s, to an OS
 
 GitOps - you can point K8s at a git repo, and every time you push a change, k8s will deploy it
 
+***
+
+## Git
