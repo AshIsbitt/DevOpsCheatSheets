@@ -131,3 +131,49 @@ GitOps - you can point K8s at a git repo, and every time you push a change, k8s 
 ***
 
 # Git
+Why use version control?
+	- You can track file change
+	- You can track who changed files, when they were changed and other metadata
+
+This becomes the IP of a company, and is the entire location of all files
+VC allows for collaboration easily, as multiple people have access to the same files and are more controlled
+Encourages consistency
+Allows for file history
+Also allows for additional security
+	- IE github can identify secret files for you
+
+Two types of VC - distributed and centralised
+	- Distributed is more complicated, but it's how Git works
+	- It's also more powerful
+	- Works through syncing via a pull/push mechanism
+
+Conflicts in VC - integrate often to prevent conflict. 
+
+What is Git
+	- Free, open source, distributed VCS
+	- Utilises folder and files on the local file system
+	- Created by Linus Torvalds (The Linux guy)
+
+#### Git commands
+`git --version` - What version of Git am I using
+`git init` - initialise a git repo 
+`git status` - What's in the repo that's been changed
+
+`git config --global --list` - See the local git config set to all and any repos on the local Machine
+`git config --local user.name` - set the local repo config username
+
+`git add .` - This adds all the untracked data to be staged
+	- Instead of `.`, you can name specific files `git add myFile.txt`
+	- `git add -u` will stage every unstaged file that was previously staged
+`git commit -m "commit message here"` - "saving" the changes to the git repo
+`git log` - This will show you the commit history
+`git cat-file -p <hash>` - This will show you the contents of a single commit
+
+`git diff` will show the difference in the specified file and it's last Push
+`git diff <commit>` will show the difference between two specified commit hashes
+`git diff --cached` will show the difference between the current commit and what's staged
+
+`git reset` sets the staging to match the last commit
+`git reset --hard` - this changes the working directory to match the last commit
+
+`git restore myFile.txt` removes the file from being staged
