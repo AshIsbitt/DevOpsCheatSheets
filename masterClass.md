@@ -166,7 +166,10 @@ What is Git
 `git add .` - This adds all the untracked data to be staged
 	- Instead of `.`, you can name specific files `git add myFile.txt`
 	- `git add -u` will stage every unstaged file that was previously staged
+	- `git add -p` will show the changed text as you stage it
 `git commit -m "commit message here"` - "saving" the changes to the git repo
+	- `git commit --amend` will let you change the previous commit message
+	- `git commit --amend --no-edit` will let you add files to the commit without staging 
 `git log` - This will show you the commit history
 `git cat-file -p <hash>` - This will show you the contents of a single commit
 
@@ -185,10 +188,7 @@ What is Git
 `git restore --staged myFile.txt` update staged with the version from the last commit
 `git restore myFile.txt` Restore the saved file from the last commit
 
-#### Branches 
-A branch is a splinter/copy of the repo that points to a specific commit on the main line. 
-You can branch off multiple times in different places, even off other branches
-This allows for multiple versions and feature testing etc.
+`git reflog` shows a reference log of previous changes, such as branch merges
 
 #### Tags
 Tags are a way to create something at my current location 
@@ -203,3 +203,75 @@ These can be seen on the `git log` command
 
 There are also annotatated tags, which allow you to add messages to the tag
 `git tag -a <tag> <commit> -m <message>`
+
+#### Remote Origins
+This is a remote copy of the repo on a cloud provider of some sort
+Github is the biggest one, but there are also bitbucket and gitlab
+
+The common name for this is `remote origin`
+`git remote add origin <url>` to add a new remote origin
+`git remote -v` to see the remote origin
+`git push origin master` to push to the master branch
+`git push --tag` is also needed to push the tags to the remote
+
+If any changes are made on the remote, they aren't reflected locally
+`git pull origin master` will make your local repo master branch match what's on the remote
+	- `git pull` does two things: `git fetch` and `git merge`
+	- `fetch` pulls the information from the remote branch
+	- `merge` merges the new info into the remote
+
+`.gitignore` is a file with a list of files that git doesn't stage
+It has no file extention, and can look inside subdirectories too
+the `.gitignore` file should be pushed though, so other people can use it and see it
+
+#### Branches 
+A branch is a splinter/copy of the repo that points to a specific commit on the main line. 
+You can branch off multiple times in different places, even off other branches
+This allows for multiple versions and feature testing etc.
+
+It's highly recommended that - when working with multiple people. you should always use branches
+`git branch <name>` to create the branch
+`git branch --list` to show all the branches
+`git checkout <name>` to switch to the named branch
+	- `git switch` will do the same thing and is preferred
+	- `checkout` can do multiple things, switch being one of those things
+
+TO merge back in, switch to the branch you want to merge into 
+`git diff <branch1>..<branch2>` will show the differences in text
+	- the two dots between the two branch names are needed
+`git merge <branch>` will merge mentioned branch into the branch you're currently in
+`git branch --merged` will show which branches have been merged together
+`git branch -d <branch>` can delete the branch once you no longer need it
+
+`git merge --no-ff <branch>` Instead of destroying the branch, this will show up in the log that there was a branch before 
+
+A three-way merge is when you have to merge a branch back into main after main has been changed.
+This can potentially face conflicts.
+Doing `git merge branch` now will show in the terminal which conflicts you will have
+	- A good way to find the conflicts is searching for 5 equals signs because theyre used as dividers
+
+`git reset --hard HEAD^1` uses the caret instead of the tilde because now main has two parents
+This says to go to the first parent, instead of going back 1 stage.
+
+``git push origin --delete <branch>` will push the branch deletion in the remote
+
+#### Rebasing
+This is when you take the changes in your branch and move those changes into a main branch
+This will still cause conflicts, but will make things easier.
+
+To rebase, make sure you're on the side branch you want to rebase from 
+`git rebase <main>` name the branch your rebasing into 
+	- This is when you'll see your conflicts that you can go in and change
+
+`git rebase --continue` will continue with the rebasing once you've fixed any conflicts
+
+Never do this on someone else's branch. Instead, you can use an interactive rebase
+`git rebase -i HEAD^3` - this will go back three generations. The `-i` will give you more control. 
+
+#### Pull requests
+This is named stupidly as it's more of a "push request"
+
+You can fork a repo, getting your own version of it that you can make your own changes with
+A pull request is pushing your version's branches/changes back to anoher user's repo
+
+
