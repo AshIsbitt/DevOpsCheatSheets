@@ -158,6 +158,7 @@ What is Git
 `git --version` - What version of Git am I using
 `git init` - initialise a git repo 
 `git status` - What's in the repo that's been changed
+	- adding `-s` will show the same info in a more concise manner on the screen.
 
 `git config --global --list` - See the local git config set to all and any repos on the local Machine
 `git config --local user.name` - set the local repo config username
@@ -175,5 +176,30 @@ What is Git
 
 `git reset` sets the staging to match the last commit
 `git reset --hard` - this changes the working directory to match the last commit
+`git reset HEAD~1` - push back the head 1 commit
+`git reset HEAD~1 --soft` - Pushes back the branch 1 commit, but without changing the saved files locally.
+	- Instead of "HEAD", you can specify a commit hash
+	- Instead of "--soft", doing "--mixed" will go down to staging
+	- Instead of "--soft", doing "--hard" will pull the files down to the working directory
 
-`git restore myFile.txt` removes the file from being staged
+`git restore --staged myFile.txt` update staged with the version from the last commit
+`git restore myFile.txt` Restore the saved file from the last commit
+
+#### Branches 
+A branch is a splinter/copy of the repo that points to a specific commit on the main line. 
+You can branch off multiple times in different places, even off other branches
+This allows for multiple versions and feature testing etc.
+
+#### Tags
+Tags are a way to create something at my current location 
+These could be used for version numbers/releases
+
+`git tag <text>` to create a tag on the current commit
+`git tag <text> <hash>` to create a tag on a previous commit
+
+These can be seen on the `git log` command 
+
+`git cat-file -t <tag>` will show the tag
+
+There are also annotatated tags, which allow you to add messages to the tag
+`git tag -a <tag> <commit> -m <message>`
