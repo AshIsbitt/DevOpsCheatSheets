@@ -23,7 +23,31 @@ and the name as (depending on your mood):
    works for you. Angels sing, and a light suddenly fills the room.
 >  - "goddamn idiotic truckload of sh\*t": when it breaks
 
+The format of this document will have the base command at the base level, and then any sub-commands or useful flags that I'd recommend to use underneath. For example:
+
+ - `git add` - this does something
+    - `-u` - something else 
+
 ## The Basics
+These are the bare basics I think you need to get started with using git. If you're trying to learn git from this md file, I'd start trying to
+understand the concepts and use the commands in this section, and come back to this document when you feel more confident or are trying to learn
+something new. Never be afraid to google something specific or check `man git ...`.
+
+Think of Git as a spaceship airlock. You can only move throguh one door at a time. This inner airlock section is called the staging area, and files added here
+have yet to actually be 'saved' with git. This only happens when you commit them. 
+
+- `git init` - Initialise a git repo in the current directory
+- `git add` - This adds the named files to the "staging area". You can also use a `.` or `*` to add all files. THIS IS NOT RECOMMENDED AT ALL
+    - `-u` - This flag will only add files that have been edited since their last `git commit` 
+- `git status` - Show what files have been edited since the last commit
+    - `-s` - Show a more compact version of the git status 
+- `git commit` - Bundle the staged changes together and commit them to the git timeline. 
+    - `-m` - This is usually **mandatory** and is followed by a string commit message
+    - `--amend` - Append the staged files to the previous commit. Otherwise, you can use this to change the commit message in your default terminal text editor
+- `git log` - Show all previous commit message history
+    - `--follow -- filename.ext` - Show all commits with changes to the specified file `filename.ext`
+    - --oneline` - Show a minimal view with a trunkated verison of the commit message and hash (Works well with decorate)
+    - `--decorate` - Show branch headings (Works well with oneline) 
 
 
 ## Branching
