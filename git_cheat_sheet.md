@@ -31,7 +31,8 @@ The format of this document will have the base command at the base level, and th
 ## The Basics
 These are the bare basics I think you need to get started with using git. If you're trying to learn git from this md file, I'd start trying to
 understand the concepts and use the commands in this section, and come back to this document when you feel more confident or are trying to learn
-something new. Never be afraid to google something specific or check `git help ...`.
+something new. Never be afraid to google something specific or check `git help ...`. If you ever get some output you aren't expecting, make sure to
+read the message git returns twice over - soetimes, it'll help you resolve issues.
 
 Think of Git as a spaceship airlock. You can only move throguh one door at a time. This inner airlock section is called the staging area, and files added here
 have yet to actually be 'saved' with git. This only happens when you commit them. 
@@ -47,7 +48,9 @@ have yet to actually be 'saved' with git. This only happens when you commit them
 - `git log` - Show all previous commit message history
     - `--follow -- filename.ext` - Show all commits with changes to the specified file `filename.ext`
     - --oneline` - Show a minimal view with a trunkated verison of the commit message and hash (Works well with decorate)
-    - `--decorate` - Show branch headings (Works well with oneline) 
+    - `--decorate` - Show branch headings (Works well with oneline)
+- `git diff` - See the changes to each file since the last commit. You can also add two commit hashes to see the difference between the two
+- `git push` - Push your changes up to the remote host (see [Working with Remotes](#Working with Remotes))
 
 ```console
 $ git init
@@ -68,11 +71,31 @@ $ git commit -m "Update  t.txt"
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 
-
 ## Branching and Tagging
+Branches are like forks in a timeline, they let you retain a "master" or "main" branch that has a working version, while creating a copy of the current state of the
+repository that you can modify in a safe environment. The benefit of this is that you can also use branches as "bookmarks" to various versions of your code, or pull
+functional versions of files after making undesired changes to them, like a video game's save states. Tagging is another way we can maintain various releases in a git
+repo, and are associated with a single specific commit. 
+
+#### Branches
+- `git branch <name>` - Create a new branch from the main/master branch
+    - '-d' - Adding this flag before the branch name will delete the branch. Sometimes you need to use `-D` as a forceful delete
+    - `--list` - This will list all active branches
+        - `-r` - Adding this flag to --list will let you view remote branches (see [Working with Remotes](#Working with Remotes)) 
+    - `-m` - Move the specified branch. Adding a second string will rename the branch 
+    - `--show-current` - Show the current branch
+- `git checkout` - Switch to the named branch. This will also let you restore a file to a working state
+    - ` origin/HEAD` - This will checkout the latest working status of the HEAD
+    - `-b` - This will create a new branch and switch to it 
+
+#### Tags
+- `git tag` - Alone, this command shows all assigned tags currently
+    - `-a <name>` - Assign a new tag.
+    - `-m` - This is usually **mandatory** and is followed by a string commit message
+    - `-d` - Delete the tag with the given name
 
 
 ## Misc Intermediate Commands 
 
 
-## Working with remotes
+## Working with Remotes
