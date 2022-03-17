@@ -31,7 +31,7 @@ The format of this document will have the base command at the base level, and th
 ## The Basics
 These are the bare basics I think you need to get started with using git. If you're trying to learn git from this md file, I'd start trying to
 understand the concepts and use the commands in this section, and come back to this document when you feel more confident or are trying to learn
-something new. Never be afraid to google something specific or check `man git ...`.
+something new. Never be afraid to google something specific or check `git help ...`.
 
 Think of Git as a spaceship airlock. You can only move throguh one door at a time. This inner airlock section is called the staging area, and files added here
 have yet to actually be 'saved' with git. This only happens when you commit them. 
@@ -49,11 +49,30 @@ have yet to actually be 'saved' with git. This only happens when you commit them
     - --oneline` - Show a minimal view with a trunkated verison of the commit message and hash (Works well with decorate)
     - `--decorate` - Show branch headings (Works well with oneline) 
 
+```console
+$ git init
+Initialized empty Git repository in /Users/ashisbitt/Documents/t/.git/
+$ echo "Hello world" > t.txt
+$ git add t.txt
+$ git status -s
+A  t.txt
+$ git commit -m "Instanciate t.txt"
+[master (root-commit) e4c705d] Instanciate t.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 t.txt
+$ echo "Hello hello" > t.txt
+$ git diff
+$ git add -u
+$ git commit -m "Update  t.txt"
+[master ea568dd] Update  t.txt
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
 
-## Branching
+
+## Branching and Tagging
 
 
-## Tagging
+## Misc Intermediate Commands 
 
 
 ## Working with remotes
