@@ -122,6 +122,14 @@ hi hi
     - `--global` - Set your global git settings. Without this, any changes made only apply to the current repo
 - ` git show <hash>` - Shows the diff on any single commit hash or git tag supplied
 
+```console
+❯ git grep Hello
+❯ git ls-files
+t.txt
+❯ git config user.name
+Ttibsi
+```
+
 ## Changing History in Git 
 
 
