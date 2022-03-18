@@ -94,6 +94,23 @@ repo, and are associated with a single specific commit.
     - `-m` - This is usually **mandatory** and is followed by a string commit message
     - `-d` - Delete the tag with the given name
 
+```console
+❯ git branch my-branch
+❯ git branch --list
+❯ git checkout my-branch
+D       t.txt
+Switched to branch 'my-branch'
+❯ echo "Hello hello\nhi hi" > t.txt
+❯ cat t.txt
+Hello hello
+hi hi
+❯ git add t.txt
+❯ git commit -m "hello"
+[my-branch 682badb] hello
+ 1 file changed, 1 insertion(+)
+ ❯ git tag -a v1.0.0 -m "v1.0.0"
+ ❯ git log --oneline
+```
 
 ## Misc Intermediate Commands 
 - `git grep <string>` - Find every instance of a given string in your git repo 
