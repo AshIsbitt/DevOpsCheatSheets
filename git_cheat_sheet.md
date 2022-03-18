@@ -78,7 +78,7 @@ functional versions of files after making undesired changes to them, like a vide
 repo, and are associated with a single specific commit. 
 
 #### Branches
-- `git branch <name>` - Create a new branch from the main/master branch
+- `git branch <name>` - Create a new branch from the main/master branch. Add a second name of a parent branch to branch off of that.
     - '-d' - Adding this flag before the branch name will delete the branch. Sometimes you need to use `-D` as a forceful delete
     - `--list` - This will list all active branches
         - `-r` - Adding this flag to --list will let you view remote branches (see [Working with Remotes](#Working with Remotes)) 
@@ -87,6 +87,7 @@ repo, and are associated with a single specific commit.
 - `git checkout` - Switch to the named branch. This will also let you restore a file to a working state
     - ` origin/HEAD` - This will checkout the latest working status of the HEAD
     - `-b` - This will create a new branch and switch to it 
+- `git merge <branch>` - Merge the named branch into the currently checked out branch
 
 #### Tags
 - `git tag` - Alone, this command shows all assigned tags currently
@@ -131,6 +132,15 @@ Ttibsi
 ```
 
 ## Changing History in Git 
+In its essence, git is a timeline of history with a given repository. The most powerful features of git is [manipulation of time](https://cultbox.co.uk/wp-content/uploads/2021/11/Thirteenth-Doctor-Who-TARDIS.jpg),
+allowing you to squash commits together, remove files from your history (never commit those passwords and secrets!!) or restore earlier versions of files. While we've
+touched on the latter already, this section will cover some of the most poweful and worry-inducing commands within git
 
+Using this analogy of the timeline, a HEAD is like a pointer, which is usually pointing to the most recent place in the timeline. Often, time manipulation
+involved manipulating this HEAD. 
+
+- `git reset` - This allows you to manipulate the HEAD of the repo.  
+- `git rebase` - 
 
 ## Working with Remotes
+
