@@ -96,6 +96,16 @@ repo, and are associated with a single specific commit.
 
 
 ## Misc Intermediate Commands 
+- `git grep <string>` - Find every instance of a given string in your git repo 
+- `git ls-files` - List every file in the directory that has been pushed to git
+- `git restore <file>` - Discard changes since the last commit.  
+- `git config` - This uses various flags to manipulate your gitconfig file, which holds global or repository settings
+    - `User.name` - See your git username
+    - `User.email` - See your git email 
+    - `--global` - Set your global git settings. Without this, any changes made only apply to the current repo
+- ` git show <hash>` - Shows the diff on any single commit hash or git tag supplied
+
+## Changing History in Git 
 
 
 ## Working with Remotes
