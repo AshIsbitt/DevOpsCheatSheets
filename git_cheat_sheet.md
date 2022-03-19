@@ -146,9 +146,48 @@ commits you want to go back, or `HEAD^^^` to go back 1 commit for every caret ch
     - `--hard` - Moving the head back using the hard flag will discard all changes since the selected commit. 
     - `--mixed` - Any changed files between {commit} and the present status are preserved, but not marked for commit. (This is the default action if no flag is specified) 
 
-Rebasing is ...
+- `git rebase` - Rebasing is insead the act of changing the order or types of commits applied. It doesn't inherently use the HEAD, but instead uses
+                the hashes of each commit. A rebase is changing history, and is a destructive act. Often, you will want an `interactive` rebase, which
+                gives you more power and control over what is going on.  
+    - `-i/--interactive <hash>` - This will open your terminal text editor with every commit between the head and the specified hash (not including the specified one)
+                                  and will give you a number of options. Any line starting with a `#` will be ignored, and this will explain all your options, including
+                                  allowing you to remove, reword, and edit commits. (example found below) 
 
-- `git rebase` - 
+```console
+> git rebase -i e4c705d 
+pick ea568dd Update t.txt
+pick 682badb hello
+
+# Rebase e4c705d..682badb onto e4c705d (2 commands)
+#
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+# x, exec <command> = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop <commit> = remove commit
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified); use -c <commit> to reword the commit message
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+```
 
 ## Working with Remotes
 
+
+## Custom git commands
