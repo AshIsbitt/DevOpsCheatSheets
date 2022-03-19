@@ -137,9 +137,17 @@ allowing you to squash commits together, remove files from your history (never c
 touched on the latter already, this section will cover some of the most poweful and worry-inducing commands within git
 
 Using this analogy of the timeline, a HEAD is like a pointer, which is usually pointing to the most recent place in the timeline. Often, time manipulation
-involved manipulating this HEAD. 
+involved moving this HEAD back and forth to change various settings. This uses the notation of either `HEAD~x` where `x` is the integer number of how many
+commits you want to go back, or `HEAD^^^` to go back 1 commit for every caret character (`^`). You can also use `HEAD@{1}` to go forward 1 commit as well. 
 
 - `git reset` - This allows you to manipulate the HEAD of the repo.  
+    - `--soft` - This will only move the head back but not inherently change anything in the git history. After moving the head back, you will see every
+                "future" change in `git diff` or `git status`. This is one way of squashing multiple commits together into one 
+    - `--hard` - Moving the head back using the hard flag will discard all changes since the selected commit. 
+    - `--mixed` - Any changed files between {commit} and the present status are preserved, but not marked for commit. (This is the default action if no flag is specified) 
+
+Rebasing is ...
+
 - `git rebase` - 
 
 ## Working with Remotes
