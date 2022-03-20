@@ -252,8 +252,8 @@ mypy.....................................................................Failed
 gh_stats/ghstats.py:63: error: Incompatible return value type (got "str", expected "List[str]")
 Found 1 error in 1 file (checked 1 source file)
 ```
-In this example, you can see that the python formatter [Black]() failed because it had to automatically reformat my code, and the type checker [mypy]()
-failed as it found one type checking error. Meanwhile other linters I've set up as pre-commit hooks passed, including checking for debug statements or making
-sure that my import statements are all correctly ordered all passed. This will automatically check when I run `git commit`, and won't successfully add a new
-commit until all these checks pass.
+In this example, you can see that the python formatter [Black](https://github.com/psf/black) failed because it had to automatically reformat my code, and the type 
+checker [mypy](https://github.com/python/mypy) failed as it found one type checking error. Meanwhile other linters I've set up as pre-commit hooks passed, 
+including checking for debug statements or making sure that my import statements are all correctly ordered all passed. This will automatically check when I run 
+`git commit`, and won't successfully add a new commit until all these checks pass.
 
