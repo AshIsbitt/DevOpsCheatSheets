@@ -79,7 +79,7 @@ repo, and are associated with a single specific commit.
 
 #### Branches
 - `git branch <name>` - Create a new branch from the main/master branch. Add a second name of a parent branch to branch off of that.
-    - '-d' - Adding this flag before the branch name will delete the branch. Sometimes you need to use `-D` as a forceful delete
+    - `-d` - Adding this flag before the branch name will delete the branch. Sometimes you need to use `-D` as a forceful delete
     - `--list` - This will list all active branches
         - `-r` - Adding this flag to --list will let you view remote branches (see [Working with Remotes](#Working with Remotes)) 
     - `-m` - Move the specified branch. Adding a second string will rename the branch 
@@ -121,7 +121,14 @@ hi hi
     - `User.name` - See your git username
     - `User.email` - See your git email 
     - `--global` - Set your global git settings. Without this, any changes made only apply to the current repo
-- ` git show <hash>` - Shows the diff on any single commit hash or git tag supplied
+- `git show <hash>` - Shows the diff on any single commit hash or git tag supplied
+- `git stash` - Temporarily save any changes since the last commit without actually committing them. This is mostly useful if you need to change branches or otherwise
+                save your changes.  
+    - `show` - Show the stashed files and changes
+    - `list` - List the various stashes saved
+    - `pop` - Restore the chosen stash to the "active" repo
+    - `clear` - Remove all stashes
+    - `drop` - Remove a single stash
 
 ```console
 ❯ git grep Hello
@@ -199,7 +206,10 @@ among developers in the organisation.
 - `git push` - Update the remote with changes made to the local repo
     - `origin HEAD` - Tell git to update the origin remote with the changes to the local repo. THIS IS THE PREFERRED METHOD OF USING PUSH
     - `origin master` - Push changes to the master branch specifically up to the remote 
-- `git pull` - The opposite of `git push`, updating the local repo with changes made to the remote
+    - `origin --tags` - Push any changes/additions to tags
+    - `--force` - If you've changed history with a `git reset` or rebase, you will need to force an update to the remote. 
+- `git pull` - The opposite of `git push`, updating the local repo with changes made to the remote. You can use any flags and subcommands with `git pull` that
+                are listed above for `git push`
 
 
 ## Custom git commands
@@ -211,3 +221,4 @@ run `git pom` instead of `git push origin master`
 [alias]
 pom = push origin master
 ```
+
