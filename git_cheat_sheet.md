@@ -222,3 +222,38 @@ run `git pom` instead of `git push origin master`
 pom = push origin master
 ```
 
+## Pre-commit
+Another tool I'd recommend to any git user is [pre-commit](https://github.com/pre-commit/pre-commit), which allows a user to set up various tools to run
+every time you run `git commit` - This is predominantly useful for things like formatters and linters, and is easily set up with a single YAML file. I'd 
+recommend taking a look at the documentation for how to install and set up properly, although you can find an example failing output below.
+
+```shell
+
+❯ pre-commit run --files ghstats.py
+check yaml...........................................(no files to check)Skipped
+fix end of files.........................................................Passed
+trim trailing whitespace.................................................Passed
+debug statements (python)................................................Passed
+Reorder python imports...................................................Passed
+black....................................................................Failed
+- hook id: black
+- files were modified by this hook
+
+reformatted gh_stats/ghstats.py
+
+All done! ✨ 🍰 ✨
+1 file reformatted.
+
+flake8...................................................................Passed
+mypy.....................................................................Failed
+- hook id: mypy
+- exit code: 1
+
+gh_stats/ghstats.py:63: error: Incompatible return value type (got "str", expected "List[str]")
+Found 1 error in 1 file (checked 1 source file)
+```
+In this example, you can see that the python formatter [Black]() failed because it had to automatically reformat my code, and the type checker [mypy]()
+failed as it found one type checking error. Meanwhile other linters I've set up as pre-commit hooks passed, including checking for debug statements or making
+sure that my import statements are all correctly ordered all passed. This will automatically check when I run `git commit`, and won't successfully add a new
+commit until all these checks pass.
+
