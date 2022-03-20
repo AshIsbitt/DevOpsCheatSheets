@@ -188,6 +188,18 @@ pick 682badb hello
 ```
 
 ## Working with Remotes
+A remote is the git terminology for a website that hosts git repositories. You may be familiar with GitHub, but other options include GitLab and Stash/BitBucket.
+These websites are primarily used for open source code under various licenses, although large companies will also privately hosted servers to share their code 
+among developers in the organisation. 
+
+- `git remote` - See the name of the current remote
+    - `add origin <link>` - Attach a remote repository to your local one. The remote is referred to as the `origin`
+    - `-v` - Verify the attached repo's URLs 
+- `git clone <link>` - Instead of attaching a remote to a already existing local repo, you instead use this to clone/download an already existing repo from the remote 
+- `git push` - Update the remote with changes made to the local repo
+    - `origin HEAD` - Tell git to update the origin remote with the changes to the local repo. THIS IS THE PREFERRED METHOD OF USING PUSH
+    - `origin master` - Push changes to the master branch specifically up to the remote 
+- `git pull` - The opposite of `git push`, updating the local repo with changes made to the remote
 
 
 ## Custom git commands
