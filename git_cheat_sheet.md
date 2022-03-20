@@ -191,3 +191,11 @@ pick 682badb hello
 
 
 ## Custom git commands
+Sometimes, you'll find that you're writing the same git or shell commands together in sequence. You can set these up as aliases to make them easier to type out.
+Navigate to your `~/.gitconfig` file and add an `[alias]` section with your commands listed underneath. See below for an example section, which you can use to
+run `git pom` instead of `git push origin master` 
+
+```
+[alias]
+pom = push origin master
+```
