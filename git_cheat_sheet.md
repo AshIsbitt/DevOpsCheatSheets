@@ -84,9 +84,11 @@ repo, and are associated with a single specific commit.
         - `-r` - Adding this flag to --list will let you view remote branches (see [Working with Remotes](#Working with Remotes)) 
     - `-m` - Move the specified branch. Adding a second string will rename the branch 
     - `--show-current` - Show the current branch
-- `git checkout` - Switch to the named branch. This will also let you restore a file to a working state
+- `git checkout` - Switch to the named branch. 
+    - `-- <file>` - Drop all changes since the previous commit on a named file
     - ` origin/HEAD` - This will checkout the latest working status of the HEAD
     - `-b` - This will create a new branch and switch to it 
+    - `<name> <origin/name>` - Download a branch from the remote
 - `git merge <branch>` - Merge the named branch into the currently checked out branch
 
 #### Tags
