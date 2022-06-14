@@ -484,7 +484,77 @@ WHERE employee.emp_id IN (
     FROM works_woth
     WHERE works_with.total_sales > 30000
 );
+
+-- find all clients for the branch that michael scott manages (mgr_id = 102) 
+-- Write the inner statement then the outer one to make things easier 
+
+SELECT client.client_name
+FROM client
+WHERE client.branch_id = ( 
+    SELECT branch.branch_id
+    FROM branch
+    WHERE branch.mgr_id = 102
+    LIMIT 1 -- This is just in case the statement returns multiple values - otherwise use IN
+);
 ```
 
+## Delete statement 
+This is the `ON DELETE SET NULL` statement when we created the tables
+Instead, this will set any Fkeys referecing a record your deleting to NULL 
+
+Instead, `ON DELETE CASCADE` will bump the Fkey values up 
+
+```sql
+-- Delete all records without breaking things
+DELETE FROM branch
+WHERE branch_id = 2;
+```
+
+## Triggers
+These are things that trigger events to do x when y happens
+Triggers only work in the terminal for delimiter reasons
+This could be useful for logging purposes
+
+```sql
+-- change the last character to end a SQL statement with
+DELIMITER $$
+
+-- Create your trigger
+CREATE
+    TRIGGER my_Trigger BEFORE INSERT -- Before you insert anything into a table
+    ON employee
+    FOR EACH ROW BEGIN -- trigger the below statement
+        INSERT INTO trigger_test VALUES(NEW.first_name); -- NEW is the next statement run 
+    END$$
+
+-- reset the delimiter
+DELIMITER ;
+```
+
+There are also IF statements in SQL that would be useful here.
+```sql
+DELIMITER $$
+CREATE
+    TRIGGER my_Trigger1 BEFORE INSERT -- Before you insert anything into a table
+    ON employee
+    FOR EACH ROW BEGIN
+        IF NEW.sex = 'M' THEN
+            INSERT INTO trigger_test VALUES('Added male'); 
+        ElIF NEW.sex = 'M' THEN
+            INSERT INTO trigger_test VALUES('Added female'); 
+        ELSE
+            INSERT INTO trigger_test VALUES('Added other'); 
+        ENDIF;
+    END$$
+
+DELIMITER ;
+```
+
+Instead of INSERT you can also create triggers for DELETE and UPDATE, and 
+instead of happening BEFORE, you can also use DURING or AFTER
+
+```sql
+DROP TRIGGER my_trigger
+```
 
 
