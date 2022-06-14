@@ -286,6 +286,205 @@ SELECT *
 FROM student
 WHERE name IN ('claire', 'kate', 'mike'); -- If item in the list 
 ```
+## Complex databases
+(IE any database with multiple tables and relationships between them)
+
+
+```sql
+--Add a foriegn key field:
+CREATE TABLE tbl2 (
+    tbl2_key INT PRIMARY KEY,
+    FOREIGN KEY(other_tbl) REFERENCES employee(tbl1_key) ON DELETE SET NULL
+);
+
+-- Update a key to be a foreign key once it's already been created
+ALTER TABLE employee
+    ADD FOREIGN KEY(branch_id)
+    REFERENCES branch(branch_id)
+    ON DELETE SET NULL;
+
+-- Composite primary key:
+CREATE TABLE tbl3 (
+    field_1 INT,
+    field_2 INT,
+    PRIMARY KEY (field_1, field_2), -- Primary key that's also a foreign key
+    FOREIGN KEY(field_2) REFERENCES tbl2(tbl2_key) ON DELETE SET NULL
+);
+```
+
+`ON DELETE CASCADE` is another option for the foreign key. This does something different:
+
+Handling a combination of primary and foreign keys in two tables bound together
+is something that needs to be handled differently. TLDR if you're setting a field
+that's a Pkey elsewhere, set it to NULL in your INSERT INTO statements
+
+```sql
+-- THe two NULL fields here are Fkeys
+INSERT INTO employee VALUES(100, 'David', 'Wallace', '1967-11-17', 'M', 250000, NULL, NULL);
+
+INSERT INTO branch VALUES(1, 'Corporate', 100, '2006-02-09');
+
+-- Set the first NULL value in the first statement to the record of the second
+-- INSERT statement
+UPDATE employee
+SET branch_id = 1
+WHERE emp_id - 100;
+```
+
+## More complex queries
+
+```sql
+-- Output a column with a different name
+SELECT first_name AS forname, last_name AS surname -- AS sets an alias for the scope of this query
+FROM employee;
+
+-- Find unique elements in a column
+SELECT DISTINCT sex
+FROM employee;
+
+-- Find the number of employees
+SELECT COUNT(emp_id)  -- Get the count of employee_id 
+FROM employee;
+```
+
+## SQL Functions
+
+```sql
+-- Find the number of female employees born after 1970
+SELECT COUNT(emp_id)
+FROM employee
+WHERE sex = 'F' AND birth_date > '1970-01-01';
+
+-- Find the average of all employee's salaries
+SELECT AVG(salary)
+FROM employee
+
+SELECT SUM(salary) -- How much the company is spending here
+FROM employee
+
+-- FInd out how many males and females there are
+SELECT COUNT(sex)
+FROM employee
+GROUP BY sex -- group the info by this value - data aggregation
+```
+
+## Wildcards
+You can use `LIKE` basically as a comparator for strings 
+`%` = any characters
+`_ ` = any single character
+
+This is a super simplified version of regex
+
+```sql
+-- FInd any clients who are an LLC
+SELECT *
+FROM client
+WHERE client_name LIKE '%LLC'; -- Any company who's name ends in 'LLC' 
+
+-- Find branch suppliers who are in the label business
+SELECT *
+FROM branch_supplier
+WHERE supplier_name LIKE '% Label%'; -- Any characters before 'label' and any chars after
+
+-- Find any employee born after october
+-- Dates are stored as YYYY-MM-DD
+SELECT *
+FROM employee
+WHERE birth_date LIKE '____-10%';
+-- '____-10%' = 4 Y chars (the four underscores) then a dash, then the number 
+-- 10, and anything after that
+```
+
+## Union
+These are special operators that can combine different `SELECT` statements
+- Unions have to have the same number of columns on both sides
+- They also have to be the same data type
+
+```sql
+-- Find a list of employee and branch names
+SELECT first_name AS Company_names
+FROM employee
+UNION 
+SELECT branch_name
+FROM branch;
+UNION
+SELECT client_name
+FROM clients
+
+-- find a list of all client and branch suppliers
+SELECT client_name, client.branch_id
+FROM client
+UNION
+SELCT supplier_name branch_supplier.branch_id
+FROM branch_supplier
+```
+
+## Joins
+These are used to combine rows on tables based on a related column on both 
+
+```sql
+-- Find all branches and the names of their managers
+SELECT employee.emp_id, employee.first_name, branch.branch_name
+FROM employee
+JOIN branch
+ON employee.emp_id = branch.mgr_id; -- specify which columns are the same data
+
+```
+Instead of using `JOIN`, you can use `LEFT JOIN` to use all the rows from the 
+left table (employee), but the specified column from the right table also appears
+and is filled out as NULL otherwise (example using left join below)
+
+```
+mysql> SELECT employee.emp_id, employee.first_name, branch.branch_name 
+FROM employee 
+LEFT JOIN branch 
+ON employee.emp_id = branch.mgr_id;
++--------+------------+-------------+
+| emp_id | first_name | branch_name |
++--------+------------+-------------+
+|    100 | David      | Corporate   |
+|    101 | Jan        | NULL        |
+|    102 | Michael    | Scranton    |
+|    103 | Angela     | NULL        |
+|    104 | Kelly      | NULL        |
+|    105 | Stanley    | NULL        |
+|    106 | Josh       | Stamford    |
+|    107 | Andy       | NULL        |
+|    108 | Jim        | NULL        |
++--------+------------+-------------+
+9 rows in set (0.00 sec)
+```
+
+You can also use a RIGHT JOIN to get all the records from the right table Instead
+```
+mysql> select employee.emp_id, employee.first_name, branch.branch_name from employee right join branch on employee.emp_id = branch.mgr_id;
++--------+------------+-------------+
+| emp_id | first_name | branch_name |
++--------+------------+-------------+
+|    100 | David      | Corporate   |
+|    102 | Michael    | Scranton    |
+|    106 | Josh       | Stamford    |
+|   NULL | NULL       | Buffalo     |
++--------+------------+-------------+
+4 rows in set (0.00 sec)
+```
+
+MySQL doesn't support the FULL OUTER JOIN feature, which will bring _all_ the 
+data from both tables.
+
+## Nested Queries
+A query with another query embedded within to get more detailed results
+
+```sql
+-- find names of all employees who have sold more than 30k to a single client
+SELECT employee.first_name, employee.last_name
+FROM employee
+WHERE employee.emp_id IN (
+    SELECT works_with.emp_id
+    FROM works_woth
+    WHERE works_with.total_sales > 30000
+);
+```
 
 
 
