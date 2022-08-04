@@ -74,6 +74,22 @@ regular expressions.
 `grep pattern myfile.txt` does the same with less overhead, although they both
 work just as well.
 
+#### Other text commands
+* `sort` - Allows you to sort the output of text files. By default this works
+alphabetically.
+    * `--reverse` - Reverse the order
+    * `--unique` - Keep only unique entries
+* `cut` - cuts out the range of characters (ex `cut -c 1-5` will show the first
+five characters in each line piped into `cut`)
+    * `-d` - delimiter flag to tell cut where to split on and find the x 
+    element returned there - ex `cut -d ' ' -f3` will split the input on spaces
+    and return the third element.
+* `uniq` - Pipe a list of data in it and duplicates will be removed.
+* `cat` - concatenate files together. The most basic usage is just to print out
+out the contents of a file.
+    * `-n` - Add line numbers
+* `echo` - print to terminal
+
 ### Process Monitoring
 
 
@@ -84,15 +100,13 @@ work just as well.
 
 
 ### Others
-* `uniq` - Pipe a list of data in it and duplicates will be removed.
 * `split` - split a file.
     * `-l x` - splits the file on every x lines
     * `-p` - Splits using a regex
-* `cat` - concatenate files together. The most basic usage is just to print out
-out the contents of a file.
-    * `-n` - Add line numbers
 * `tac` - cat, but reversed. It'll print out the file in reverse order.
 * `tee` - This duplicated stdin to both stdout and to a file. Note that you're
 meant to pipe something into tee, it doesn't straight up print to a terminal.
-* `echo` - print to terminal
+* `tr` - A super simple find and replace that only works on single characters 
+it's considered a poor man's `sed` - ex `tr "a" "A"`. You can enter multiple
+characters too ex `tr "ae" "AE"`
 
