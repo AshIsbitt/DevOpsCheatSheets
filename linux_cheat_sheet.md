@@ -5,6 +5,9 @@ section of the [devops roadmap](https://roadmap.sh/devops). Some of these, I
 am already familiar with, and documenting here for completion's sake. Other
 terminal commands here are new to me. 
 
+A good trick is to use the `tldr` command (which needs installing) to bring up
+a cheat sheet for these commands to see how they would be used in practice.
+
 ### Text Manipulation Tools
 #### `awk`
 `awk` is basically it's own scripting language, a small lightweight one that's
@@ -31,7 +34,31 @@ As well as print, you can also use `length()`, which takes comparison
 operators and a file name. `awk 'length($0) > 5' /etc/shells`. `awk` also has
 a number of other powerful tools similarly as it's its own scripting language
 
-####`sed`
+#### `sed`
+This is the `stream editor`. The most common usage is as a find and replace, 
+which works similar to standard linux/nvim replacment. 
+
+`sed 's/find/replace/' < oldfile > newfile`
+
+The first `s` is for "substitution" and by default will only touch the first 
+instance in every line of the specified characters The `oldfile` is the source 
+and the `newfile` is where you're writing the replaced contents to. `sed` also 
+allows for other dividers to be used instead of the `/` - you could use `:` or 
+`#` (which is the second most common)
+
+ * After the last `/`, you can add a `g` for a "global" replacement across the
+   entire file.
+ * Before the `s/`, you can add another part to find a pattern that each line 
+   starts with to act against. `sed -i '/Replace/s/the/THE/g'` will take any 
+   line that starts with the word "Replace" and change any instance of "the" in 
+ * At the end of the sed command, you can use `/d` to delete the line you've 
+   specified.
+
+ * using the `-i` flag tells `sed` to make the changes in place, not needing a 
+   new file.
+ * If you specify multiple patterns, you need to use the `-e` flag in front of 
+   each pattern to make sure `sed` reads them right.
+
 
 ### Process Monitoring
 
@@ -44,4 +71,14 @@ a number of other powerful tools similarly as it's its own scripting language
 
 ### Others
 * `uniq` - Pipe a list of data in it and duplicates will be removed.
+* `split` - split a file.
+    * `-l x` - splits the file on every x lines
+    * `-p` - Splits using a regex
+* `cat` - concatenate files together. The most basic usage is just to print out
+out the contents of a file.
+    * `-n` - Add line numbers
+* `tac` - cat, but reversed. It'll print out the file in reverse order.
+* `tee` - This duplicated stdin to both stdout and to a file. Note that you're
+meant to pipe something into tee, it doesn't straight up print to a terminal.
+* `echo` - print to terminal
 
