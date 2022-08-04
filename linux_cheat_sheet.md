@@ -59,6 +59,20 @@ allows for other dividers to be used instead of the `/` - you could use `:` or
  * If you specify multiple patterns, you need to use the `-e` flag in front of 
    each pattern to make sure `sed` reads them right.
 
+#### `grep`
+`grep` is basically pattern matching against a string or file. You can also 
+pipe in other strings. The most basic example is `grep pattern file`. The 
+pattern can also be a list (ex `grep [aeiou] ./*`). `grep` basically uses
+regular expressions.
+    * `-w` - This will match exactly the word passed to it, not a pattern.
+    * `--exclude-dirs` - takes a list of directories to not search
+    * `-i` - case insensitive search
+    * `-A` - return x number of lines past the line that matches the pattern
+
+- Search a directory: `grep pattern ./*`
+- Technically you don't have to pipe `cat` into `grep` beause doing 
+`grep pattern myfile.txt` does the same with less overhead, although they both
+work just as well.
 
 ### Process Monitoring
 
