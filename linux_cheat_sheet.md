@@ -74,6 +74,11 @@ regular expressions.
 `grep pattern myfile.txt` does the same with less overhead, although they both
 work just as well.
 
+There are other "flavours" of grep as well, such as `egrep` (extended grep) and
+`fgrep` (Fixed grep). There are slight speed benefits to using either of these
+as they offer specific niche differences in handling special characters in 
+an input file.
+
 #### Other text commands
 * `sort` - Allows you to sort the output of text files. By default this works
 alphabetically.
@@ -89,6 +94,16 @@ five characters in each line piped into `cut`)
 out the contents of a file.
     * `-n` - Add line numbers
 * `echo` - print to terminal
+* `fmt` - A text formatter that is mostly used with a file to make sure that 
+they display at 75 characters long, breaking on whitespace. Some shorter lines
+will be combined instead.
+    * `-w` - Specify the width with an integer
+* `nl` - This will number the lines of text that you give it, or text can be 
+piped in as well.
+* `wc` - Count the lines, words, and bytes in a file
+    * `-l` - count only lines
+    * `-w` - count only words
+    * `-c` - count only characters
 
 ### Process Monitoring
 
