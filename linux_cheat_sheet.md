@@ -106,6 +106,10 @@ piped in as well.
     * `-c` - count only characters
 
 ### Process Monitoring
+* `ps` - Stands for "process status", it displays information on different linux processes the system is currently running. 
+    * `ps aux` will show all the current processes in a BSD format, which will give the user more information. This is useful for grepping against.
+    * `-u` - filter by user
+    * `-C` - search for a process by name if you dont know the PID.
 
 
 ### Network
