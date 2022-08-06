@@ -118,7 +118,7 @@ unmount a drive because it's in use.
     * `-i` - See processes that use a specific port
     * `-u` - filter by username
 
-#### `top` and alternatives
+#### `top` and `htop`
 `top` and `htop` are system monitors, showing you all active processes as well
 as a summary/dashboard at the top displaying information about your system.
 
@@ -140,7 +140,11 @@ list isntead of a bunch of text, making it easier to process visually. You can
 also use `/` to search for a process in htop. 
 
 
-
+#### `atop`
+Alternatively, `atop` is another system tool that should be installed via a 
+package manager, but it displays information about the cumulative information 
+on a system's resources whereas the bottom panel still shows information on 
+each process. It's the top panel that's the more useful one here. 
 
 ### Network
 
