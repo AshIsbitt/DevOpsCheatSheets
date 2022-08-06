@@ -106,10 +106,40 @@ piped in as well.
     * `-c` - count only characters
 
 ### Process Monitoring
-* `ps` - Stands for "process status", it displays information on different linux processes the system is currently running. 
-    * `ps aux` will show all the current processes in a BSD format, which will give the user more information. This is useful for grepping against.
+* `ps` - Stands for "process status", it displays information on different 
+linux processes the system is currently running. 
+    * `ps aux` will show all the current processes in a BSD format, which will 
+    give the user more information. This is useful for grepping against.
     * `-u` - filter by user
     * `-C` - search for a process by name if you dont know the PID.
+* `lsof` - This is the list open files command, and requires installation
+through a package manager (such as apt). This is useful for when you can't 
+unmount a drive because it's in use. 
+    * `-i` - See processes that use a specific port
+    * `-u` - filter by username
+
+#### `top` and alternatives
+`top` and `htop` are system monitors, showing you all active processes as well
+as a summary/dashboard at the top displaying information about your system.
+
+The dashboard shows the following information (in order of rows). Note that 
+this appears to vary based on system - macos appears to have slightly different
+output
+    * Uptime, active users, process active, sleeping, threads in use
+    * Load average across the last 1, 5, 15 minutes, as well as CPU usage
+    * memory in usage
+    * Swap memory
+
+In top, you can use a number of keyboard commands to customise your experience.
+    * press `z` to enable colours
+    ~ press `i` to only see active tasks
+    * press `e` and `E` to cycle through the numeric units.  
+
+`htop` instead shows similar statistics using a bar chart above the processes
+list isntead of a bunch of text, making it easier to process visually. You can
+also use `/` to search for a process in htop. 
+
+
 
 
 ### Network
@@ -128,4 +158,5 @@ meant to pipe something into tee, it doesn't straight up print to a terminal.
 * `tr` - A super simple find and replace that only works on single characters 
 it's considered a poor man's `sed` - ex `tr "a" "A"`. You can enter multiple
 characters too ex `tr "ae" "AE"`
+* `uptime` - Show you the lifetime of the system.
 
