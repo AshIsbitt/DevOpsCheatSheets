@@ -169,6 +169,18 @@ will take different values.
 
 
 ### Others
+* `df` - Disk filesystem - Shows a full summary of the filesystem and it's 
+divisions
+    * `-h` - human readable - uses more reasonable scales instead of all values
+    only in bytes. 
+    * `-t` - Show the filesystem type that each entry uses (ie exfat)
+* `du` - Disk Usage - This shows various statistics on the file system. By 
+itself, it's pretty useless as there's too much information at once to read.
+You can also pass a specific path to it as well.
+    * `-h` - human readable - uses more reasonable scales instead of all values
+    in bytes.
+* `history` - show all command history. Give this an integer to only display 
+the last x values.
 * `split` - split a file.
     * `-l x` - splits the file on every x lines
     * `-p` - Splits using a regex
@@ -178,5 +190,6 @@ meant to pipe something into tee, it doesn't straight up print to a terminal.
 * `tr` - A super simple find and replace that only works on single characters 
 it's considered a poor man's `sed` - ex `tr "a" "A"`. You can enter multiple
 characters too ex `tr "ae" "AE"`
+* `uname` - Shows details about the current machine/it's OS. 
+    * `-a` - show all information
 * `uptime` - Show you the lifetime of the system.
-
