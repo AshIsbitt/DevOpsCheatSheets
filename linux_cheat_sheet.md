@@ -146,10 +146,22 @@ package manager, but it displays information about the cumulative information
 on a system's resources whereas the bottom panel still shows information on 
 each process. It's the top panel that's the more useful one here. 
 
-### Network
+### Network tools
+* `traceroute` - Displays the route packets are taking to the network host 
+using TCP/IP. This takes a few momentrs to run but will outline each stage of 
+the process.
+* `mtr` - Stands for My Trace Route, it acts similarly to traceroute, except
+it works in aggregate instead of just a single run. It's more useful when 
+trying to diagnose packet loss
+* `ping` - Useful for testing network connectivity.
+    * `-i` - specify the seconds between each request (defaults to 1)
+    * `-a` - If your terminal supports it, it'll ring a bell with each 
+    packet recieved.
+* `netstat` -  
 
 
 ### System Performance
+
 
 
 ### Others
