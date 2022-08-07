@@ -157,7 +157,11 @@ trying to diagnose packet loss
     * `-i` - specify the seconds between each request (defaults to 1)
     * `-a` - If your terminal supports it, it'll ring a bell with each 
     packet recieved.
-* `netstat` -  
+* `netstat` - network statistics, this outputs a large amount of text. Note 
+that the MacOS/FreeBSD version of netstat is different to the linux version and
+will take different values.
+* `airmon` - 
+* `tcpdump` - 
 
 
 ### System Performance
