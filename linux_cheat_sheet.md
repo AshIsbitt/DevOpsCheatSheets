@@ -159,9 +159,17 @@ trying to diagnose packet loss
     packet recieved.
 * `netstat` - network statistics, this outputs a large amount of text. Note 
 that the MacOS/FreeBSD version of netstat is different to the linux version and
-will take different values.
-* `airmon` - 
-* `tcpdump` - 
+will take different values. It's best to pipe this into `less` so that it's 
+easier to read.
+    * `-i` - Show currently available network interfaces, such as ethernet and
+    wifi
+    * `-l` - See all active network connections
+* `tcpdump` - Used to analyse network traffic. This is one of those tools that
+will require `sudo` access to run, otherwise will give no useful information.
+    * `-D` - List all network interfaces.
+    * `-c`- pass an integer and only catch that number of packets.
+    * `-n` and `-nn` are used together to only see the ip address and port, 
+    reducing the amount of noise in the output.
 
 
 ### System Performance
