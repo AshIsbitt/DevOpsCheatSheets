@@ -198,6 +198,10 @@ divisions
     * `-h` - human readable - uses more reasonable scales instead of all values
     only in bytes. 
     * `-t` - Show the filesystem type that each entry uses (ie exfat)
+* `dtrace` Dynamic tracking compiler that allows you to gain information about
+the behaviour of the OS and user programs by interacting with the kernal. 
+Unlike `strace`, this is available on MacOS ported from solaris. This works 
+by creating a "probe" that digs into the kernal to derive information.
 * `du` - Disk Usage - This shows various statistics on the file system. By 
 itself, it's pretty useless as there's too much information at once to read.
 You can also pass a specific path to it as well.
@@ -208,6 +212,10 @@ the last x values.
 * `split` - split a file.
     * `-l x` - splits the file on every x lines
     * `-p` - Splits using a regex
+* `strace` - Traces system calls and signals, allowing you to see how a program
+interacts with the OS. 
+    * `df` - pass this argument to see all system calls 
+    * `-h` - human readable mode
 * `tac` - cat, but reversed. It'll print out the file in reverse order.
 * `tee` - This duplicated stdin to both stdout and to a file. Note that you're
 meant to pipe something into tee, it doesn't straight up print to a terminal.
