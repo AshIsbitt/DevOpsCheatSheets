@@ -170,11 +170,27 @@ will require `sudo` access to run, otherwise will give no useful information.
     * `-c`- pass an integer and only catch that number of packets.
     * `-n` and `-nn` are used together to only see the ip address and port, 
     reducing the amount of noise in the output.
-
+* `iptables` - This is the built in linux firewall and manages rules on what
+ports can and cant be accessed. This is another command that requires sudo 
+access.
 
 ### System Performance
-
-
+* `iostat` - Used for monitoring system IO device loading. Without any flags, 
+it'll show CPU information and info on every disk in the system.
+    * `-m` - Display information in megabytes
+    * `-p` - specify device to see information on. Follow this with an integer
+    to specify how many seconds to wait before refreshing the output.
+* `sar` - The system activity reporter - This will need enabling in 
+/etc/default/sysstat to run. and will write to a data file at /var/log/sysstat.
+By default, sar will run every 10 minutes.
+    * `-u` - This will give us the current usage of the server.
+    * `-p` - This will output the sar data from a file passed to it.
+    * `-b` - Shows IO data, which could show why a server is running slower. 
+* `vmstat` - virtual memory statistics, this also shows system performance
+information in an easy to read way, including the number of processes active.
+    * `-s` - memory statistics
+    * `-d` - Read write statistics for various disks
+    * `-t` - add timestamps to output.
 
 ### Others
 * `df` - Disk filesystem - Shows a full summary of the filesystem and it's 
